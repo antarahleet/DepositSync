@@ -12,7 +12,7 @@
 - **Branching:** create feature branches per step (e.g., `feat/step-01-bootstrap`). Open a PR at each step.
 - **Security:** Never expose service keys on the client. Server-only env vars must stay in API routes or server components.
 - **Logging:** Maintain an append-only `log.md` in the repo root. After **every** action, append a new entry with timestamp, step, actions taken, technical decisions & reasoning, files changed, and commands run. **Never remove or rewrite** previous entries.
-- **Git/PR cadence:** GitHub is already connected. Commit **early and often** (atomic commits); push **regularly** to `origin`. Open **one PR per step** (e.g., `feat/step-01-bootstrap`). Include a short description and link to relevant `log.md` entries.
+- **Git/PR cadence:** GitHub repository: `https://github.com/antarahleet/DepositSync`. Commit **early and often** (atomic commits); push **regularly** to `origin`. Open **one PR per step** (e.g., `feat/step-01-bootstrap`). Include a short description and link to relevant `log.md` entries.
 
 ---
 
@@ -21,7 +21,7 @@
 **[Ask User]**
 
 1. Confirm target stack: **Next.js (App Router) + Vercel**, **Supabase (DB + Storage)**, **OpenAI**, **Outlook + Power Automate**.
-2. Confirm repository host (GitHub) and grant access if needed.
+2. Confirm repository host (GitHub: https://github.com/antarahleet/DepositSync) and grant access if needed.
 3. Confirm we can use TypeScript.
 4. Confirm you have created and **opened** the project root folder named `` (or specify another name). Choose the project name accordingly; if `DepositSync` exists, we will use the **current folder** and **will not** create a nested subfolder.
 

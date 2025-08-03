@@ -100,4 +100,32 @@
 - `git checkout -b main` - created main branch
 - `git push -u origin main` - pushed main branch to GitHub
 
-**Status:** Ready for Step 2 - Environment & Secrets Skeleton 
+**Status:** Ready for Step 2 - Environment & Secrets Skeleton
+
+## 2024-12-19 14:50 - Step 2: Environment & Secrets Skeleton
+
+### Actions Taken
+- Created `.env.local.example` with all required environment variables
+- Built `lib/env.ts` for server-side environment validation
+- Created comprehensive README.md with setup instructions
+- Committed and pushed changes to GitHub
+
+### Technical Decisions & Reasoning
+- **Environment Validation**: Used Zod schema validation in `lib/env.ts`
+  - Reasoning: Type-safe environment variable checking, prevents runtime errors
+- **Server-Only Validation**: Environment validation only runs on server
+  - Reasoning: Keeps sensitive keys secure, prevents client-side exposure
+- **Comprehensive README**: Added detailed setup instructions
+  - Reasoning: Makes project easy to understand and contribute to
+
+**Files Changed:**
+- `.env.local.example` (new) - Template for environment variables
+- `lib/env.ts` (new) - Environment validation helper
+- `README.md` (new) - Project documentation and setup guide
+
+**Commands Run:**
+- `git add -A` - staged all new files
+- `git commit -m "feat: add environment setup and documentation"` - committed changes
+- `git push` - pushed to GitHub main branch
+
+**Status:** Ready for Step 3 - Supabase Project & Schema 
