@@ -8,13 +8,13 @@ const envSchema = z.object({
   OPENAI_API_KEY: z.string().min(1),
   
   // Vercel Blob
-  BLOB_READ_WRITE_TOKEN: z.string().min(1),
+  BLOB_READ_WRITE_TOKEN: z.string().min(1).optional(),
   
   // Webhook (optional for future email integration)
   INBOUND_WEBHOOK_SECRET: z.string().optional(),
 })
 
-export function validateEnv() {
+function validateEnv() {
   const env = {
     DATABASE_URL: process.env.DATABASE_URL,
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
@@ -31,6 +31,9 @@ export function validateEnv() {
 
   return result.data
 }
+
+// Export the validated environment variables
+export const env = validateEnv()
 
 // Type for validated environment variables
 export type Env = z.infer<typeof envSchema> 
