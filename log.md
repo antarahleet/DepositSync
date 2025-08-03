@@ -154,4 +154,62 @@
 - `git commit -m "fix: update tailwind postcss plugin for v4 compatibility"` - committed fix
 - `git push` - pushed to GitHub
 
-**Status:** Ready for Step 3 - Supabase Project & Schema 
+**Status:** Ready for Step 3 - Supabase Project & Schema
+
+## 2024-12-19 15:00 - Step 2: Tailwind CSS v3 Downgrade
+
+### Actions Taken
+- Uninstalled Tailwind CSS v4 and @tailwindcss/postcss
+- Installed Tailwind CSS v3.4.0 for better compatibility
+- Updated postcss.config.js to use standard tailwindcss plugin
+- Restarted development server
+- Committed and pushed the fix to GitHub
+
+### Technical Decisions & Reasoning
+- **Tailwind CSS Version**: Downgraded from v4 to v3.4.0
+  - Reasoning: v4 has compatibility issues with current Next.js setup, v3 is more stable
+- **Plugin Configuration**: Reverted to standard tailwindcss plugin
+  - Reasoning: v3 uses the standard plugin, no separate PostCSS package needed
+- **Immediate Fix**: Applied fix when user reported styling issues
+  - Reasoning: Ensures proper visual appearance before proceeding to next steps
+
+**Files Changed:**
+- `postcss.config.js` (updated) - Reverted to standard tailwindcss plugin
+- `package.json` (updated) - Changed to tailwindcss v3.4.0
+
+**Commands Run:**
+- `npm uninstall tailwindcss @tailwindcss/postcss` - removed v4 packages
+- `npm install -D tailwindcss@^3.4.0 postcss autoprefixer` - installed v3
+- `git add -A` - staged changes
+- `git commit -m "fix: downgrade to tailwindcss v3 for better compatibility"` - committed fix
+- `git push` - pushed to GitHub
+
+**Status:** Ready for Step 3 - Database Setup (Neon/Turso)
+
+## 2024-12-19 15:05 - Step 2: Architecture Pivot
+
+### Actions Taken
+- Updated environment variables to use new architecture
+- Changed from Supabase to Neon/Turso + Vercel Blob
+- Updated README.md to reflect new tech stack
+- Modified lib/env.ts for new environment validation
+
+### Technical Decisions & Reasoning
+- **Architecture Pivot**: Switched from Supabase to Neon/Turso + Vercel Blob
+  - Reasoning: Faster MVP development, better free tiers, simpler setup
+- **Manual Upload First**: Replaced email parsing with frontend upload
+  - Reasoning: Faster testing and iteration, can add email later
+- **Unified API**: Single `/api/checks` endpoint for all processing
+  - Reasoning: Simpler architecture, reusable for future webhook integration
+- **Frontend-First**: Immediate UI instead of backend-only testing
+  - Reasoning: Better user experience and faster development feedback
+
+**Files Changed:**
+- `.env.local.example` (updated) - New environment variables
+- `lib/env.ts` (updated) - Updated validation schema
+- `README.md` (updated) - New tech stack and setup instructions
+
+**Commands Run:**
+- None (file updates only)
+
+**Status:** Ready for Step 3 - Database Setup (Neon/Turso) 

@@ -1,24 +1,24 @@
 import { z } from 'zod'
 
 const envSchema = z.object({
-  // Supabase
-  SUPABASE_URL: z.string().url(),
-  SUPABASE_ANON_KEY: z.string().min(1),
-  SUPABASE_SERVICE_ROLE_KEY: z.string().min(1),
+  // Database
+  DATABASE_URL: z.string().url(),
   
   // OpenAI
   OPENAI_API_KEY: z.string().min(1),
   
-  // Webhook
-  INBOUND_WEBHOOK_SECRET: z.string().min(1),
+  // Vercel Blob
+  BLOB_READ_WRITE_TOKEN: z.string().min(1),
+  
+  // Webhook (optional for future email integration)
+  INBOUND_WEBHOOK_SECRET: z.string().optional(),
 })
 
 export function validateEnv() {
   const env = {
-    SUPABASE_URL: process.env.SUPABASE_URL,
-    SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY,
-    SUPABASE_SERVICE_ROLE_KEY: process.env.SUPABASE_SERVICE_ROLE_KEY,
+    DATABASE_URL: process.env.DATABASE_URL,
     OPENAI_API_KEY: process.env.OPENAI_API_KEY,
+    BLOB_READ_WRITE_TOKEN: process.env.BLOB_READ_WRITE_TOKEN,
     INBOUND_WEBHOOK_SECRET: process.env.INBOUND_WEBHOOK_SECRET,
   }
 

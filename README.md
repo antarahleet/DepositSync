@@ -12,9 +12,9 @@ Automated check processing and logging system for real estate brokerages.
 ## Tech Stack
 
 - **Frontend**: Next.js 14+ (App Router) with TypeScript
-- **Database & Storage**: Supabase (PostgreSQL + Storage)
+- **Database**: Neon (PostgreSQL) or Turso (SQLite)
+- **Storage**: Vercel Blob
 - **AI Processing**: OpenAI API
-- **Email Integration**: Outlook + Microsoft Power Automate
 - **Hosting**: Vercel
 - **Styling**: Tailwind CSS
 
@@ -23,9 +23,9 @@ Automated check processing and logging system for real estate brokerages.
 ### Prerequisites
 
 - Node.js 18+
-- Supabase account
+- Neon or Turso database account
 - OpenAI API key
-- Microsoft 365 account (for Power Automate)
+- Vercel account (for Blob storage)
 
 ### Installation
 
@@ -45,12 +45,11 @@ Automated check processing and logging system for real estate brokerages.
    cp .env.local.example .env.local
    ```
    
-   Fill in your environment variables in `.env.local`:
-   - `SUPABASE_URL`: Your Supabase project URL
-   - `SUPABASE_ANON_KEY`: Your Supabase anonymous key
-   - `SUPABASE_SERVICE_ROLE_KEY`: Your Supabase service role key
-   - `OPENAI_API_KEY`: Your OpenAI API key
-   - `INBOUND_WEBHOOK_SECRET`: A secret for webhook authentication
+       Fill in your environment variables in `.env.local`:
+    - `DATABASE_URL`: Your Neon or Turso database connection string
+    - `OPENAI_API_KEY`: Your OpenAI API key
+    - `BLOB_READ_WRITE_TOKEN`: Your Vercel Blob token
+    - `INBOUND_WEBHOOK_SECRET`: A secret for future webhook authentication
 
 4. Run the development server:
    ```bash
@@ -62,7 +61,9 @@ Automated check processing and logging system for real estate brokerages.
 ## Development
 
 - **Health Check**: `GET /api/health` - Returns `{ ok: true, timestamp: "..." }`
-- **Checks Dashboard**: `/checks` - View all processed checks (coming soon)
+- **Upload Check**: `/checks/new` - Upload and process check images
+- **Checks Dashboard**: `/checks` - View all processed checks
+- **Check Details**: `/checks/[id]` - View and edit individual checks
 
 ## Deployment
 
