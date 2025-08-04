@@ -6,6 +6,14 @@ import { env } from '@/lib/env'
 
 export async function POST(request: NextRequest) {
   try {
+    // Debug: Log environment variables (without sensitive values)
+    console.log('Environment check:', {
+      hasOpenAI: !!env.OPENAI_API_KEY,
+      hasBlobToken: !!env.BLOB_READ_WRITE_TOKEN,
+      hasDatabase: !!env.DATABASE_URL,
+      nodeEnv: process.env.NODE_ENV
+    })
+    
     // Parse multipart form data
     const formData = await request.formData()
     const file = formData.get('file') as File
@@ -75,8 +83,15 @@ export async function POST(request: NextRequest) {
 
   } catch (error) {
     console.error('Error processing check upload:', error)
+    
+    // Return more detailed error information for debugging
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error'
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { 
+        error: 'Internal server error',
+        details: errorMessage,
+        timestamp: new Date().toISOString()
+      },
       { status: 500 }
     )
   }
