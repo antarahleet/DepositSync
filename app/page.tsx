@@ -6,7 +6,7 @@ export default function Home() {
       <div className="max-w-4xl mx-auto px-4 py-16">
         <div className="text-center mb-12">
           <h1 className="text-5xl font-bold text-gray-900 mb-4">
-            DepositSync
+            DepositSync V3
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             Automated check processing and logging system for real estate brokerages. 

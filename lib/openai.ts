@@ -51,11 +51,21 @@ export async function extractCheckData(imageUrl: string): Promise<ExtractedCheck
       throw new Error('No response from OpenAI')
     }
 
-    // Clean up the response to ensure it is valid JSON
-    const cleanedContent = content.replace(/```json/g, '').replace(/```/g, '').trim()
+    console.log("Raw content from OpenAI:", content);
+
+    // More robustly find the JSON block, even with markdown backticks
+    const startIndex = content.indexOf('{');
+    const endIndex = content.lastIndexOf('}');
+    
+    if (startIndex === -1 || endIndex === -1) {
+      throw new Error('Could not find a valid JSON object in the response.');
+    }
+    
+    const jsonString = content.substring(startIndex, endIndex + 1);
+    console.log("Extracted JSON string:", jsonString);
 
     // Parse the JSON response
-    const extractedData = JSON.parse(cleanedContent) as ExtractedCheckData
+    const extractedData = JSON.parse(jsonString) as ExtractedCheckData
     
     return extractedData
   } catch (error) {
