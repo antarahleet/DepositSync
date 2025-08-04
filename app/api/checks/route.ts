@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { db } from '@/lib/db'
 import { uploadToBlob } from '@/lib/blob'
 import { extractCheckData } from '@/lib/openai'
+import { env } from '@/lib/env'
 
 export async function POST(request: NextRequest) {
   try {
@@ -25,16 +26,16 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if environment variables are set up
-    if (!process.env.OPENAI_API_KEY) {
+    if (!env.OPENAI_API_KEY) {
       return NextResponse.json(
         { error: 'OpenAI API key not configured' },
         { status: 500 }
       )
     }
 
-    // For testing without Vercel Blob, we'll use a placeholder URL
-    // In production, you'll need to set up Vercel Blob
-    const blobUrl = process.env.BLOB_READ_WRITE_TOKEN 
+    // For local development, use base64 fallback to avoid Blob token issues
+    const isLocal = process.env.NODE_ENV === 'development'
+    const blobUrl = (env.BLOB_READ_WRITE_TOKEN && !isLocal)
       ? await uploadToBlob(file)
       : `data:${file.type};base64,${Buffer.from(await file.arrayBuffer()).toString('base64')}`
 

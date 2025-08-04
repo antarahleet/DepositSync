@@ -51,8 +51,11 @@ export async function extractCheckData(imageUrl: string): Promise<ExtractedCheck
       throw new Error('No response from OpenAI')
     }
 
+    // Clean up the response to ensure it is valid JSON
+    const cleanedContent = content.replace(/```json/g, '').replace(/```/g, '').trim()
+
     // Parse the JSON response
-    const extractedData = JSON.parse(content) as ExtractedCheckData
+    const extractedData = JSON.parse(cleanedContent) as ExtractedCheckData
     
     return extractedData
   } catch (error) {
