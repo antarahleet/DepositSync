@@ -16,9 +16,11 @@
     "openai": "^5.11.0",
     "react": "^18",
     "react-dom": "^18",
+    "use-debounce": "^10.0.5",
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@tailwindcss/aspect-ratio": "^0.4.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",

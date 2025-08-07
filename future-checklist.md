@@ -3,13 +3,13 @@
 ## UI/UX Improvements
 
 ### Navigation & Layout
-- [ ] **Home button** - Add navigation back to homepage from all pages
-- [ ] **Search functionality** - Implement search bar with filterable criteria:
-  - [ ] Search by name/payor
-  - [ ] Search by memo content
+- [x] **Home button** - Add navigation back to homepage from all pages
+- [x] **Search functionality** - Implement search bar with filterable criteria:
+  - [x] Search by name/payor
+  - [x] Search by memo content
   - [ ] Search by date range
   - [ ] Search by amount
-  - [ ] Search by check number
+  - [x] Search by check number
   - [ ] Toggle between different search criteria
 
 ### Image Handling
@@ -20,6 +20,7 @@
 ### Check Management
 - [ ] **Custom check naming** - Ability to rename checks instead of showing "Check #2343"
 - [ ] **Memo field importance** - Ensure memo field is properly extracted and displayed (contains property addresses)
+- [ ] **AI handwritten check detection** - Automatically detect if check is filled out by hand (personal check) and flag for human review
 - [ ] **Review workflow improvements**:
   - [ ] Itemize "needs review" status with specific reasons
   - [ ] Turn off review status once review is completed
@@ -57,18 +58,19 @@
 - [ ] **Email notifications** - Notify users of new check uploads
 
 ### Authentication & Security
-- [ ] **User authentication** - Login/logout functionality
+- [ ] **User authentication** - Login/logout functionality (see `email_auth.md` for implementation guide)
 - [ ] **Role-based access** - Different permissions for different users
 - [ ] **Data encryption** - Secure storage of sensitive information
 
 ## Priority Levels
 
 ### High Priority
-1. Home button
-2. Search functionality
-3. Memo field importance
-4. Review workflow improvements
-5. Full image preview
+1. [x] Home button
+2. [x] Search functionality
+3. [ ] Memo field importance
+4. [ ] AI handwritten check detection
+5. [ ] Review workflow improvements
+6. [ ] Full image preview
 
 ### Medium Priority
 1. Custom check naming

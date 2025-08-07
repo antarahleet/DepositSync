@@ -25,6 +25,7 @@ export default function CheckDetailPage() {
   const [error, setError] = useState<string | null>(null)
   const [isEditing, setIsEditing] = useState(false)
   const [editData, setEditData] = useState<Partial<Check>>({})
+  const [updatingStatus, setUpdatingStatus] = useState(false)
 
   useEffect(() => {
     if (params.id) {
@@ -73,6 +74,26 @@ export default function CheckDetailPage() {
       setIsEditing(false)
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to update check')
+    }
+  }
+
+  const markAsReviewed = async () => {
+    if (!check) return
+    try {
+      setUpdatingStatus(true)
+      const response = await fetch(`/api/checks/${check.id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...check, status: 'parsed' })
+      })
+      const data = await response.json()
+      if (!response.ok) throw new Error(data.error || 'Failed to update status')
+      setCheck(data.check)
+      setEditData(data.check)
+    } catch (err) {
+      setError(err instanceof Error ? err.message : 'Failed to update status')
+    } finally {
+      setUpdatingStatus(false)
     }
   }
 
@@ -303,6 +324,15 @@ export default function CheckDetailPage() {
                   >
                     Edit Check
                   </button>
+                  {check.status === 'needs_review' && (
+                    <button
+                      onClick={markAsReviewed}
+                      disabled={updatingStatus}
+                      className="ml-3 px-4 py-2 text-sm font-medium text-white bg-green-600 border border-transparent rounded-md hover:bg-green-700 disabled:opacity-50"
+                    >
+                      {updatingStatus ? 'Marking...' : 'Mark as Reviewed'}
+                    </button>
+                  )}
                 </div>
               )}
             </div>

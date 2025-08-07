@@ -30,7 +30,8 @@ A real estate check logging system built with Next.js, Neon PostgreSQL, and Verc
    Then edit `.env.local` with your actual values:
    - `DATABASE_URL`: Your Neon PostgreSQL connection string
    - `OPENAI_API_KEY`: Your OpenAI API key
-   - `BLOB_READ_WRITE_TOKEN`: Your Vercel Blob token
+   - `BLOB_READ_WRITE_TOKEN`: Your Vercel Blob token (optional for local dev)
+   - `INBOUND_WEBHOOK_SECRET`: Secret to access debug endpoints (optional)
 
 4. **Set up the database**
    ```bash

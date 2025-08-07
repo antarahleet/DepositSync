@@ -18,6 +18,7 @@ export async function extractCheckData(imageUrl: string): Promise<ExtractedCheck
   try {
     const response = await openai.chat.completions.create({
       model: "gpt-4o",
+      response_format: { type: 'json_object' },
       messages: [
         {
           role: "user",
@@ -51,18 +52,20 @@ export async function extractCheckData(imageUrl: string): Promise<ExtractedCheck
       throw new Error('No response from OpenAI')
     }
 
-    console.log("Raw content from OpenAI:", content);
+    if (process.env.NODE_ENV !== 'production') {
+      console.log("Raw content from OpenAI:", content);
+    }
 
-    // More robustly find the JSON block, even with markdown backticks
+    // Prefer direct JSON when using response_format
     const startIndex = content.indexOf('{');
     const endIndex = content.lastIndexOf('}');
-    
     if (startIndex === -1 || endIndex === -1) {
       throw new Error('Could not find a valid JSON object in the response.');
     }
-    
     const jsonString = content.substring(startIndex, endIndex + 1);
-    console.log("Extracted JSON string:", jsonString);
+    if (process.env.NODE_ENV !== 'production') {
+      console.log("Extracted JSON string:", jsonString);
+    }
 
     // Parse the JSON response
     const extractedData = JSON.parse(jsonString) as ExtractedCheckData

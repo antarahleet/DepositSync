@@ -43,7 +43,7 @@ export async function PUT(
         memo: body.memo,
         payor: body.payor,
         payee: body.payee,
-        status: body.status || 'needs_review'
+        status: body.status || 'parsed'
       }
     })
 

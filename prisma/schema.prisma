@@ -22,8 +22,18 @@ model Check {
   payor       String?
   payee       String?
   imageUrl    String
-  status      String   @default("needs_review")
+  status      CheckStatus @default(needs_review)
   createdAt   DateTime @default(now())
 
   @@map("Check")
+  @@index([createdAt])
+  @@index([checkNumber])
+  @@index([payor])
+  @@index([payee])
+  @@index([memo])
+}
+
+enum CheckStatus {
+  parsed
+  needs_review
 }
